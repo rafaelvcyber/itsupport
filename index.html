@@ -4,243 +4,206 @@
     <meta charset="utf-8"/>
     <title>Rafael Vargas | Cybersecurity Portfolio</title>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.prod.website-files.com/64656e700a1d9566ec780de0/css/redline-cyber-security-staging.webflow.shared.4188600ed.min.css" rel="stylesheet" type="text/css"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --dark-bg: #050505;
-        }
+        :root { --neon-blue: #00f2ff; --dark-bg: #050505; }
+        body { background-color: var(--dark-bg); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; overflow-x: hidden; }
 
-        body {
-            background-color: var(--dark-bg);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
+        /* --- MARCA PERSONAL --- */
+        .brand-header {
+            position: absolute; top: 40px; left: 12%; z-index: 10;
+            font-weight: 800; font-size: 18px; letter-spacing: 1px; text-transform: uppercase;
         }
+        .brand-header span { color: var(--neon-blue); }
 
-        /* --- ANIMACIÓN DE LA LÍNEA CON PUNTO (LOOP) --- */
-        .line-container {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
+        /* --- ANIMACIÓN DE LA LÍNEA --- */
+        .line-wrapper { position: absolute; left: 0; top: 0; width: 100%; height: 1200px; z-index: 0; pointer-events: none; }
+        .main-path { stroke: var(--neon-blue); stroke-width: 2; fill: none; opacity: 0.25; }
+        .dot-point { fill: var(--neon-blue); filter: drop-shadow(0 0 8px var(--neon-blue)); }
 
-        .line-path {
-            stroke: var(--neon-blue);
-            stroke-width: 1.5;
-            fill: none;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawLoop 6s linear infinite;
-            opacity: 0.6;
+        /* --- HERO --- */
+        .hero_wrapper { 
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; 
+            padding: 160px 10% 60px 12%; position: relative; z-index: 1; 
         }
+        .hero-title { font-size: clamp(40px, 6vw, 80px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; }
 
-        .line-dot {
-            fill: var(--neon-blue);
-            filter: drop-shadow(0 0 8px var(--neon-blue));
-            offset-path: path("M80,0 L80,350 L140,400 L140,900");
-            animation: moveDot 6s linear infinite;
-        }
-
-        @keyframes drawLoop {
-            0% { stroke-dashoffset: 1000; opacity: 0; }
-            10% { opacity: 0.6; }
-            50% { stroke-dashoffset: 0; opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { stroke-dashoffset: 0; opacity: 0; }
-        }
-
-        @keyframes moveDot {
-            0% { offset-distance: 0%; opacity: 0; }
-            10% { opacity: 1; }
-            50% { offset-distance: 100%; opacity: 1; }
-            51% { opacity: 0; }
-            100% { offset-distance: 100%; opacity: 0; }
-        }
-
-        /* --- ESTRUCTURA --- */
-        .hero_wrapper {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 80px;
-            padding: 160px 10% 100px 12%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: clamp(45px, 6vw, 85px);
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -3px;
-            margin-bottom: 25px;
-        }
-
-        /* --- ICONOS EXACTOS DE REDLINE (Basados en soc2.html) --- */
-        .services_grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .service_card {
-            background: #0a0a0a;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            position: relative;
-            transition: 0.3s;
-        }
-
-        .service_card:hover {
-            border-color: var(--neon-blue);
-            background: #0f0f0f;
-        }
-
-        /* El contenedor cuadrado de icono de Redline */
-        .icon-container {
-            width: 50px;
-            height: 50px;
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--neon-blue);
-        }
-
-        /* --- CONTADORES --- */
-        .counter-row {
-            display: flex;
-            gap: 60px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 30px;
-        }
-        .counter-num { font-size: 38px; font-weight: 800; color: var(--neon-blue); margin: 0; }
-        .counter-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #555; }
-
-        .btn_engagement {
-            background: var(--neon-blue);
-            color: #000;
-            padding: 18px 35px;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 40px; /* Estilo píldora de Redline */
-            display: inline-block;
-            transition: 0.3s;
-        }
+        /* --- SKILLS CARDS --- */
+        .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .cyber-card { background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; transition: 0.4s; border-radius: 8px; position: relative; z-index: 2; }
+        .cyber-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); background: #0f0f0f; }
         
-        /* Certificaciones Blanco Puro */
-        .cert_strip {
-            padding: 40px 10%;
-            display: flex;
-            gap: 50px;
-            filter: brightness(0) invert(1);
-            opacity: 0.4;
+        /* AJUSTE AQUÍ: Centrado absoluto de iconos */
+        .icon-container { 
+            width: 85px; height: 85px; border: 1px solid rgba(0, 242, 255, 0.3); 
+            display: flex; align-items: center; justify-content: center; 
+            margin-bottom: 25px; color: var(--neon-blue); border-radius: 10px;
+            background: rgba(0, 242, 255, 0.02);
+            line-height: 0; /* Elimina espacio de texto residual */
+            padding: 0;    /* Asegura que no haya padding asimétrico */
+        }
+        .icon-container svg { 
+            width: 45px; height: 45px; 
+            display: block; /* Evita el comportamiento de línea */
+        }
+
+        .cyber-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+        .cyber-card p { font-size: 11px; color: #555; line-height: 1.5; margin: 0; }
+
+        /* --- SECCIÓN DE VIDEOS --- */
+        .video-section { padding: 60px 12% 100px 12%; position: relative; z-index: 2; }
+        .video-container { display: flex; overflow-x: auto; gap: 20px; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: none; }
+        .video-container::-webkit-scrollbar { display: none; }
+        
+        .video-card { 
+            min-width: 350px; height: 210px; background: #000; border: 1px solid rgba(255,255,255,0.1); 
+            scroll-snap-align: start; border-radius: 12px; position: relative; overflow: hidden; cursor: pointer;
+        }
+        .video-card video { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: 0.5s; }
+        .video-card:hover video { opacity: 1; }
+        
+        .play-hint {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 44px; height: 44px; border: 1px solid var(--neon-blue); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.5); color: var(--neon-blue);
+        }
+
+        .btn-engagement { background: var(--neon-blue); color: #000; padding: 18px 40px; border-radius: 100px; font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px; font-size: 12px; letter-spacing: 1px; }
+
+        @media (max-width: 991px) {
+            .hero_wrapper { grid-template-columns: 1fr; padding-top: 120px; text-align: center; }
+            .brand-header { left: 50%; transform: translateX(-50%); }
+            .icon-container { margin: 0 auto 25px auto; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .line-wrapper { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="line-container">
-        <svg width="100%" height="1000">
-            <path class="line-path" d="M80,0 L80,350 L140,400 L140,900" />
-            <circle class="line-dot" r="4" />
+    <div class="brand-header">RAFAEL <span>VARGAS</span></div>
+
+    <div class="line-wrapper">
+        <svg width="100%" height="100%">
+            <path id="masterPath" class="main-path" d="M80,0 L80,350 L140,400 L140,1100" />
+            <circle id="movingDot" class="dot-point" r="5" cx="-10" cy="-10" />
         </svg>
     </div>
-
-    <nav style="padding: 30px 10%; position: absolute; width: 100%; display: flex; justify-content: space-between; z-index: 100;">
-        <div style="font-weight: 800; font-size: 20px;">RAFAEL <span style="color:var(--neon-blue)">VARGAS</span></div>
-        <div style="display: flex; gap: 40px; font-size: 11px; font-weight: 700; letter-spacing: 1px;">
-            <span>INICIO</span>
-            <span>CAPACIDADES</span>
-            <span style="color:var(--neon-blue)">CONTACTO</span>
-        </div>
-    </nav>
 
     <main class="hero_wrapper">
         <div data-aos="fade-right">
             <h1 class="hero-title">GESTIÓN Y RESOLUCIÓN<br><span style="color:var(--neon-blue)">DE INCIDENTES TI</span></h1>
-            <p style="color: #666; max-width: 450px; margin-bottom: 40px; font-size: 18px;">
-                Protegiendo el Entorno Digital. Especialista en Soporte TI y Analista SOC enfocado en la detección de amenazas.
+            <p style="color: #666; max-width: 480px; margin-top: 25px; font-size: 18px; line-height: 1.6;">
+                Técnico en soporte TI, administración de entornos Windows/Linux, redes TCP/IP y gestión de Active Directory.
             </p>
-            <a href="#" class="btn_engagement">Start Engagement</a>
+            <a href="#" class="btn-engagement">START ENGAGEMENT</a>
 
-            <div class="counter-row">
+            <div style="display: flex; gap: 70px; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px;">
                 <div>
-                    <p class="counter-num">25+</p>
-                    <p class="counter-label">Sistemas Ok</p>
+                    <div style="font-size: 45px; font-weight: 800; color: var(--neon-blue); line-height: 1;">+<span class="counter" data-target="120">0</span></div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 700;">Horas Lab</div>
                 </div>
                 <div>
-                    <p class="counter-num">100%</p>
-                    <p class="counter-label">Seguridad</p>
+                    <div style="font-size: 45px; font-weight: 800; color: var(--neon-blue); line-height: 1;">&lt;<span class="counter" data-target="30">0</span>min</div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 700;">Tiempo de Triage</div>
+                </div>
+                <div>
+                    <div style="font-size: 45px; font-weight: 800; color: var(--neon-blue); line-height: 1;">+<span class="counter" data-target="10">0</span></div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 700;">Tecnologías</div>
                 </div>
             </div>
         </div>
 
-        <div class="services_grid">
-            <div class="service_card" data-aos="fade-up">
+        <div class="cards-grid">
+            <div class="cyber-card" data-aos="fade-up">
                 <div class="icon-container">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
-                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-                    </svg>
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/><path d="M7 18c0-2 2-4 5-4s5 2 5 4"/></svg>
                 </div>
-                <h3 style="font-size: 15px; margin-bottom: 5px;">Optimización SOC</h3>
-                <p style="font-size: 12px; color: #444;">Detección proactiva de amenazas.</p>
+                <h3>Administración de AD</h3>
+                <p>Gestión de identidades, accesos y GPOs en Windows Server.</p>
             </div>
-
-            <div class="service_card" data-aos="fade-up" data-aos-delay="100">
+            <div class="cyber-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="icon-container">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
                 </div>
-                <h3 style="font-size: 15px; margin-bottom: 5px;">Soporte TI</h3>
-                <p style="font-size: 12px; color: #444;">Infraestructura crítica robusta.</p>
+                <h3>Networking y Redes</h3>
+                <p>Configuración DHCP, DNS y diagnóstico TCP/IP.</p>
             </div>
-
-            <div class="service_card" data-aos="fade-up" data-aos-delay="200">
+            <div class="cyber-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="icon-container">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/>
-                    </svg>
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
                 </div>
-                <h3 style="font-size: 15px; margin-bottom: 5px;">Redes Seguras</h3>
-                <p style="font-size: 12px; color: #444;">Auditoría de comunicaciones.</p>
+                <h3>Entornos Windows/Linux</h3>
+                <p>Soporte multiplataforma y gestión vía Terminal/SSH.</p>
             </div>
-
-            <div class="service_card" data-aos="fade-up" data-aos-delay="300">
+            <div class="cyber-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="icon-container">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
-                <h3 style="font-size: 15px; margin-bottom: 5px;">Pentesting</h3>
-                <p style="font-size: 12px; color: #444;">Pruebas de intrusión éticas.</p>
+                <h3>Soporte y Triage</h3>
+                <p>Resolución de incidencias y gestión de tickets críticos.</p>
             </div>
         </div>
     </main>
 
-    <div class="cert_strip">
-        <img src="https://cdn.prod.website-files.com/64656e700a1d9566ec780de0/64a16ecb8d584d2e53acb3a7_OSCP%202.png" height="30">
-        <img src="https://cdn.prod.website-files.com/64656e700a1d9566ec780de0/64a16ecd7647dffce8637fa7_CRTP%20Badge%202.png" height="30">
-        <img src="https://cdn.prod.website-files.com/64656e700a1d9566ec780de0/64a16ecb86ddc9c49c39ca9b_OSWE%202.png" height="30">
-        <img src="https://cdn.prod.website-files.com/64656e700a1d9566ec780de0/64ed70d24f0a202497645f78_Group%2014.png" height="30">
-    </div>
+    <section class="video-section">
+        <h2 style="font-size: 10px; letter-spacing: 3px; color: var(--neon-blue); text-transform: uppercase; margin-bottom: 30px;">Laboratorios Técnicos</h2>
+        <div class="video-container">
+            <div class="video-card" onmouseover="this.querySelector('video').play()" onmouseout="this.querySelector('video').pause()">
+                <video loop muted playsinline><source src="Portafolio_2.mp4" type="video/mp4"></video>
+                <div class="play-hint"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-card" onmouseover="this.querySelector('video').play()" onmouseout="this.querySelector('video').pause()">
+                <video loop muted playsinline><source src="video2.mp4" type="video/mp4"></video>
+                <div class="play-hint"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+            <div class="video-card" onmouseover="this.querySelector('video').play()" onmouseout="this.querySelector('video').pause()">
+                <video loop muted playsinline><source src="video3.mp4" type="video/mp4"></video>
+                <div class="play-hint"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
+        </div>
+    </section>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 800, once: true });
+
+        const path = document.getElementById('masterPath');
+        const dot = document.getElementById('movingDot');
+        const pathLength = path.getTotalLength();
+        path.style.strokeDasharray = pathLength;
+        path.style.strokeDashoffset = pathLength;
+
+        function animateLine() {
+            let startTime = null;
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                let progress = (timestamp - startTime) / 3000;
+                if (progress > 1.2) { startTime = timestamp; progress = 0; }
+                path.style.strokeDashoffset = pathLength * (1 - Math.min(progress, 1));
+                const pt = path.getPointAtLength(pathLength * Math.min(progress, 1));
+                dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y);
+                requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+        animateLine();
+
+        document.querySelectorAll('.counter').forEach(c => {
+            const target = +c.getAttribute('data-target');
+            let count = 0;
+            const update = () => {
+                const speed = target / 100;
+                if (count < target) {
+                    count += speed;
+                    c.innerText = Math.ceil(count);
+                    setTimeout(update, 25);
+                } else { c.innerText = target; }
+            };
+            update();
+        });
     </script>
 </body>
 </html>
