@@ -18,15 +18,13 @@
         }
         .brand-header span { color: var(--neon-blue); }
 
-        /* --- ANIMACIÓN DE LA LÍNEA CON MÁSCARA (CORRECCIÓN MÓVIL) --- */
+        /* --- LÍNEA SVG --- */
         .line-wrapper { 
             position: absolute; left: 0; top: 0; width: 100%; height: 1200px; z-index: 0; pointer-events: none;
-            /* Máscara para que la línea no tape el texto en móvil */
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 25%, transparent 40%, transparent 65%, black 80%);
-            mask-image: linear-gradient(to bottom, black 0%, black 25%, transparent 40%, transparent 65%, black 80%);
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 20%, transparent 35%, transparent 60%, black 75%);
+            mask-image: linear-gradient(to bottom, black 0%, black 20%, transparent 35%, transparent 60%, black 75%);
         }
 
-        /* En escritorio no necesitamos que se desvanezca */
         @media (min-width: 992px) {
             .line-wrapper { -webkit-mask-image: none; mask-image: none; }
         }
@@ -41,52 +39,66 @@
         }
         .hero-title { font-size: clamp(40px, 6vw, 80px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; }
 
-        /* --- SKILLS CARDS (ICONOS RESTAURADOS) --- */
+        /* --- SKILLS CARDS --- */
+        .skills-container { display: flex; flex-direction: column; gap: 20px; }
+        .skills-header { font-size: 10px; letter-spacing: 3px; color: var(--neon-blue); text-transform: uppercase; font-weight: 700; margin-bottom: 10px; opacity: 0.8; }
         .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .cyber-card { background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; border-radius: 8px; position: relative; z-index: 2; transition: 0.4s; }
+        .cyber-card { background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 8px; position: relative; z-index: 2; transition: 0.4s; }
         .cyber-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
         
         .icon-container { 
-            width: 85px; height: 85px; border: 1px solid rgba(0, 242, 255, 0.3); 
+            width: 60px; height: 60px; border: 1px solid rgba(0, 242, 255, 0.3); 
             display: flex; align-items: center; justify-content: center; 
-            margin-bottom: 25px; color: var(--neon-blue); border-radius: 10px;
+            margin-bottom: 20px; color: var(--neon-blue); border-radius: 10px;
             background: rgba(0, 242, 255, 0.02);
         }
-        .icon-container svg { width: 45px; height: 45px; display: block; }
-        .cyber-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
-        .cyber-card p { font-size: 11px; color: #555; line-height: 1.5; margin: 0; }
+        .icon-container svg { width: 30px; height: 30px; }
 
-        /* --- SECCIÓN DE VIDEOS (5 VIDEOS) --- */
-        .video-section { padding: 80px 0; position: relative; z-index: 2; text-align: center; }
+        .cyber-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: #eee; }
+        .cyber-card p { font-size: 11px; color: #777; line-height: 1.6; margin: 0; }
+
+        /* --- VIDEO SECTION --- */
+        .video-section { padding: 60px 0 20px 0; position: relative; z-index: 2; text-align: center; }
         .video-container { 
-            display: flex; overflow-x: auto; gap: 25px; padding: 60px 20%; 
+            display: flex; overflow-x: auto; gap: 30px; padding: 40px 20%; 
             scroll-snap-type: x mandatory; scrollbar-width: none; align-items: center;
         }
         .video-container::-webkit-scrollbar { display: none; }
+
         .video-card { 
             min-width: clamp(280px, 40vw, 450px); height: clamp(160px, 25vw, 260px);
             background: #000; border: 1px solid rgba(255,255,255,0.1); 
-            scroll-snap-align: center; border-radius: 12px; transition: transform 0.4s ease, border-color 0.4s;
-            flex-shrink: 0;
+            scroll-snap-align: center; border-radius: 12px; position: relative; 
+            overflow: hidden; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s;
+            flex-shrink: 0; cursor: pointer;
         }
-        .video-card:hover, .video-card:focus-within { transform: scale(1.15); border-color: var(--neon-blue); z-index: 5; }
+
+        .video-card:hover, .video-card:focus-within {
+            transform: scale(1.1);
+            border-color: var(--neon-blue);
+            z-index: 10;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
         .video-card video { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- GADGET FINAL --- */
+        /* --- GADGET & CONTACT SECTIONS --- */
         .scramble-section {
-            padding: 100px 12%; display: flex; align-items: center; justify-content: center; gap: 40px;
+            padding: 60px 12% 40px 12%; display: flex; align-items: center; justify-content: center; gap: 40px;
             position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.05);
         }
         .scramble-label { font-size: 28px; font-weight: 800; max-width: 450px; line-height: 1.2; }
         .scramble-pill { border: 1px solid var(--neon-blue); border-radius: 100px; padding: 20px 60px; min-width: 320px; text-align: center; background: rgba(0, 242, 255, 0.03); }
         #scramble-target { font-size: 28px; font-weight: 500; color: #fff; }
 
-        .btn-engagement { background: var(--neon-blue); color: #000; padding: 18px 40px; border-radius: 100px; font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px; font-size: 12px; }
+        /* BOTÓN DE CONTACTO */
+        .btn-engagement { background: var(--neon-blue); color: #000; padding: 18px 40px; border-radius: 100px; font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px; font-size: 12px; letter-spacing: 1px; transition: 0.3s; }
+        .btn-engagement:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
 
         @media (max-width: 991px) {
-            .hero_wrapper, .scramble-section { grid-template-columns: 1fr; flex-direction: column; text-align: center; padding-top: 120px; }
-            .video-container { padding: 40px 10%; }
+            .hero_wrapper, .scramble-section { grid-template-columns: 1fr; flex-direction: column; text-align: center; padding-top: 100px; }
+            .video-container { padding: 30px 10%; }
             .scramble-pill { min-width: 100%; padding: 15px 20px; }
+            .cards-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -107,7 +119,7 @@
             <p style="color: #666; max-width: 480px; margin-top: 25px; font-size: 18px; line-height: 1.6;">
                 Técnico en soporte TI, administración de entornos Windows/Linux, redes TCP/IP y gestión de Active Directory.
             </p>
-            <a href="#" class="btn-engagement">START ENGAGEMENT</a>
+            <a href="#contact" class="btn-engagement">START ENGAGEMENT</a>
 
             <div style="display: flex; gap: 40px; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px; flex-wrap: wrap; justify-content: center;">
                 <div>
@@ -125,34 +137,37 @@
             </div>
         </div>
 
-        <div class="cards-grid">
-            <div class="cyber-card" data-aos="fade-up">
-                <div class="icon-container">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/><path d="M7 18c0-2 2-4 5-4s5 2 5 4"/></svg>
+        <div class="skills-container">
+            <div class="skills-header" data-aos="fade-up">Technical Core Skills</div>
+            <div class="cards-grid">
+                <div class="cyber-card" data-aos="fade-up">
+                    <div class="icon-container">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/><path d="M7 18c0-2 2-4 5-4s5 2 5 4"/></svg>
+                    </div>
+                    <h3>Administración de AD</h3>
+                    <p>Implementación y despliegue de políticas de grupo (GPOs), gestión de usuarios y control de accesos centralizado en Windows Server.</p>
                 </div>
-                <h3>Administración de AD</h3>
-                <p>Gestión de identidades, accesos y GPOs en Windows Server.</p>
-            </div>
-            <div class="cyber-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="icon-container">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+                <div class="cyber-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon-container">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+                    </div>
+                    <h3>Networking y Redes</h3>
+                    <p>Configuración robusta de protocolos DHCP, resolución de nombres DNS y diagnóstico avanzado de conectividad mediante modelo TCP/IP.</p>
                 </div>
-                <h3>Networking y Redes</h3>
-                <p>Configuración DHCP, DNS y diagnóstico TCP/IP.</p>
-            </div>
-            <div class="cyber-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="icon-container">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                <div class="cyber-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon-container">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                    </div>
+                    <h3>Entornos Windows/Linux</h3>
+                    <p>Administración de servidores y estaciones de trabajo multiplataforma, automatización de tareas y gestión remota segura vía SSH/Terminal.</p>
                 </div>
-                <h3>Entornos Windows/Linux</h3>
-                <p>Soporte multiplataforma y gestión vía Terminal/SSH.</p>
-            </div>
-            <div class="cyber-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="icon-container">
-                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <div class="cyber-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="icon-container">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <h3>Soporte y Triage</h3>
+                    <p>Atención técnica de alto nivel, priorización de incidentes críticos y documentación detallada para el cumplimiento de SLAs exigentes.</p>
                 </div>
-                <h3>Soporte y Triage</h3>
-                <p>Resolución de incidencias y gestión de tickets críticos.</p>
             </div>
         </div>
     </main>
@@ -160,7 +175,7 @@
     <section class="video-section">
         <h2 style="font-size: 10px; letter-spacing: 3px; color: var(--neon-blue); text-transform: uppercase; margin-bottom: 10px;">Laboratorios Técnicos</h2>
         <div class="video-container">
-            <div class="video-card"><video controls><source src="Portafolio_2.mp4" type="video/mp4"></video></div>
+            <div class="video-card"><video controls><source src="video1.mp4" type="video/mp4"></video></div>
             <div class="video-card"><video controls><source src="video2.mp4" type="video/mp4"></video></div>
             <div class="video-card"><video controls><source src="video3.mp4" type="video/mp4"></video></div>
             <div class="video-card"><video controls><source src="video4.mp4" type="video/mp4"></video></div>
@@ -173,26 +188,32 @@
         <div class="scramble-pill"><div id="scramble-target">Infraestructura</div></div>
     </section>
 
+    <section id="contact" class="scramble-section" style="flex-direction: column; text-align: center; padding-top: 20px; padding-bottom: 100px; border-top: none;">
+        <div class="scramble-label" style="font-size: 36px; margin-bottom: 20px;">Contáctame</div>
+        <div class="scramble-pill">
+            <a href="mailto:rafaelvargas17@hotmail.es" style="color:var(--neon-blue);font-weight:800;text-decoration:none;">
+                rafaelvargas17@hotmail.es
+            </a>
+        </div>
+    </section>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // CONTADORES RESTAURADOS
+        // ANIMACIÓN CONTADORES
         document.querySelectorAll('.counter').forEach(c => {
             const target = +c.getAttribute('data-target');
             let count = 0;
             const update = () => {
-                const speed = target / 60;
-                if (count < target) {
-                    count += speed;
-                    c.innerText = Math.ceil(count);
-                    setTimeout(update, 30);
-                } else { c.innerText = target; }
+                const speed = target / 50;
+                if (count < target) { count += speed; c.innerText = Math.ceil(count); setTimeout(update, 30); }
+                else { c.innerText = target; }
             };
             update();
         });
 
-        // SCRAMBLE TI
+        // GADGET SCRAMBLE
         class TextScramble {
             constructor(el) { this.el = el; this.chars = '!<>-_\\/[]{}—=+*^?#________'; this.update = this.update.bind(this); }
             setText(newText) {
@@ -221,13 +242,13 @@
                 if (complete !== this.queue.length) { this.frameRequest = requestAnimationFrame(this.update); this.frame++; } else { this.resolve(); }
             }
         }
-        const phrases = ['Infraestructura', 'Soporte Técnico', 'Desarrollo Web', 'Bases de Datos', 'Redes de Datos', 'Virtualización'];
+        const phrases = ['Infraestructura', 'Soporte Técnico', 'Virtualización', 'Bases de Datos', 'Redes de Datos', 'Seguridad TI'];
         const fx = new TextScramble(document.getElementById('scramble-target'));
         let counter = 0;
         const next = () => { fx.setText(phrases[counter]).then(() => { setTimeout(next, 2500); }); counter = (counter + 1) % phrases.length; };
         next();
 
-        // ANIMACIÓN LÍNEA
+        // ANIMACIÓN LÍNEA SVG
         const path = document.getElementById('masterPath');
         const dot = document.getElementById('movingDot');
         if(path) {
