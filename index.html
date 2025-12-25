@@ -12,7 +12,10 @@
         body { background-color: var(--dark-bg); color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; overflow-x: hidden; }
 
         /* --- MARCA PERSONAL --- */
-        .brand-header { position: absolute; top: 40px; left: 12%; z-index: 10; font-weight: 800; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
+        .brand-header {
+            position: absolute; top: 40px; left: 12%; z-index: 10;
+            font-weight: 800; font-size: 18px; letter-spacing: 1px; text-transform: uppercase;
+        }
         .brand-header span { color: var(--neon-blue); }
 
         /* --- ANIMACIÓN DE LA LÍNEA --- */
@@ -21,84 +24,138 @@
         .dot-point { fill: var(--neon-blue); filter: drop-shadow(0 0 8px var(--neon-blue)); }
 
         /* --- HERO --- */
-        .hero_wrapper { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; padding: 160px 10% 60px 12%; position: relative; z-index: 1; }
+        .hero_wrapper { 
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; 
+            padding: 160px 10% 60px 12%; position: relative; z-index: 1; 
+        }
         .hero-title { font-size: clamp(40px, 6vw, 80px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; }
 
         /* --- SKILLS CARDS (CENTRADOS) --- */
         .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .cyber-card { background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.05); padding: 35px; transition: 0.4s; border-radius: 8px; position: relative; z-index: 2; }
-        .icon-container { width: 85px; height: 85px; border: 1px solid rgba(0, 242, 255, 0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 25px; color: var(--neon-blue); border-radius: 10px; background: rgba(0, 242, 255, 0.02); line-height: 0; }
-        .icon-container svg { width: 45px; height: 45px; }
+        .cyber-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); background: #0f0f0f; }
+        
+        .icon-container { 
+            width: 85px; height: 85px; border: 1px solid rgba(0, 242, 255, 0.3); 
+            display: flex; align-items: center; justify-content: center; 
+            margin-bottom: 25px; color: var(--neon-blue); border-radius: 10px;
+            background: rgba(0, 242, 255, 0.02);
+            line-height: 0; padding: 0;
+        }
+        .icon-container svg { width: 45px; height: 45px; display: block; }
 
-        /* --- SECCIÓN DE VIDEOS (MODO ZOOM) --- */
+        .cyber-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+        .cyber-card p { font-size: 11px; color: #555; line-height: 1.5; margin: 0; }
+
+        /* --- SECCIÓN DE VIDEOS --- */
         .video-section { padding: 60px 12% 100px 12%; position: relative; z-index: 2; }
-        .video-container { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; scrollbar-width: none; }
+        .video-container { display: flex; overflow-x: auto; gap: 20px; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: none; }
         
         .video-card { 
             min-width: 350px; height: 210px; background: #000; border: 1px solid rgba(255,255,255,0.1); 
-            border-radius: 12px; position: relative; cursor: pointer; transition: transform 0.3s ease;
+            scroll-snap-align: start; border-radius: 12px; position: relative; overflow: hidden;
+        }
+        
+        /* Video modo YouTube: sin opacidad y con controles */
+        .video-card video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: block;
+            opacity: 1; /* Para que se vea bien claro */
         }
 
-        .video-card video { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 12px; }
+        .btn-engagement { background: var(--neon-blue); color: #000; padding: 18px 40px; border-radius: 100px; font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px; font-size: 12px; letter-spacing: 1px; }
 
-        /* ESTADO AGRANDADO (Lightbox) */
-        .video-card.active {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(2); /* Se agranda al doble y se centra */
-            z-index: 999;
-            width: 40vw; /* Ancho en pantalla grande */
-            height: auto;
-            box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 20px var(--neon-blue);
+        @media (max-width: 991px) {
+            .hero_wrapper { grid-template-columns: 1fr; padding-top: 120px; text-align: center; }
+            .brand-header { left: 50%; transform: translateX(-50%); }
+            .icon-container { margin: 0 auto 25px auto; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .line-wrapper { display: none; }
         }
-
-        /* Fondo oscuro al agrandar */
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 998;
-            display: none;
-        }
-        .overlay.active { display: block; }
-
-        .btn-engagement { background: var(--neon-blue); color: #000; padding: 18px 40px; border-radius: 100px; font-weight: 800; text-decoration: none; display: inline-block; margin-top: 30px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div class="overlay" id="videoOverlay"></div>
     <div class="brand-header">RAFAEL <span>VARGAS</span></div>
 
     <div class="line-wrapper">
-        <svg width="100%" height="100%"><path id="masterPath" class="main-path" d="M80,0 L80,350 L140,400 L140,1100" /><circle id="movingDot" class="dot-point" r="5" cx="-10" cy="-10" /></svg>
+        <svg width="100%" height="100%">
+            <path id="masterPath" class="main-path" d="M80,0 L80,350 L140,400 L140,1100" />
+            <circle id="movingDot" class="dot-point" r="5" cx="-10" cy="-10" />
+        </svg>
     </div>
 
     <main class="hero_wrapper">
         <div data-aos="fade-right">
             <h1 class="hero-title">GESTIÓN Y RESOLUCIÓN<br><span style="color:var(--neon-blue)">DE INCIDENTES TI</span></h1>
+            <p style="color: #666; max-width: 480px; margin-top: 25px; font-size: 18px; line-height: 1.6;">
+                Técnico en soporte TI, administración de entornos Windows/Linux, redes TCP/IP y gestión de Active Directory.
+            </p>
             <a href="#" class="btn-engagement">START ENGAGEMENT</a>
+
+            <div style="display: flex; gap: 70px; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px;">
+                <div>
+                    <div style="font-size: 45px; font-weight: 800; color: var(--neon-blue); line-height: 1;">+<span class="counter" data-target="120">0</span></div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 700;">Horas Lab</div>
+                </div>
+                <div>
+                    <div style="font-size: 45px; font-weight: 800; color: var(--neon-blue); line-height: 1;">&lt;<span class="counter" data-target="30">0</span>min</div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 700;">Tiempo de Triage</div>
+                </div>
+                <div>
+                    <div style="font-size: 45px; font-weight: 800; color: var(--neon-blue); line-height: 1;">+<span class="counter" data-target="10">0</span></div>
+                    <div style="font-size: 10px; letter-spacing: 2px; color: #555; text-transform: uppercase; margin-top: 8px; font-weight: 700;">Tecnologías</div>
+                </div>
             </div>
+        </div>
 
         <div class="cards-grid">
             <div class="cyber-card" data-aos="fade-up">
-                <div class="icon-container"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div class="icon-container">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/><path d="M7 18c0-2 2-4 5-4s5 2 5 4"/></svg>
+                </div>
                 <h3>Administración de AD</h3>
-                <p>Gestión de identidades y GPOs.</p>
+                <p>Gestión de identidades, accesos y GPOs en Windows Server.</p>
             </div>
+            <div class="cyber-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-container">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6" y2="6"/><line x1="6" y1="18" x2="6" y2="18"/></svg>
+                </div>
+                <h3>Networking y Redes</h3>
+                <p>Configuración DHCP, DNS y diagnóstico TCP/IP.</p>
             </div>
+            <div class="cyber-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-container">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                </div>
+                <h3>Entornos Windows/Linux</h3>
+                <p>Soporte multiplataforma y gestión vía Terminal/SSH.</p>
+            </div>
+            <div class="cyber-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-container">
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <h3>Soporte y Triage</h3>
+                <p>Resolución de incidencias y gestión de tickets críticos.</p>
+            </div>
+        </div>
     </main>
 
     <section class="video-section">
         <h2 style="font-size: 10px; letter-spacing: 3px; color: var(--neon-blue); text-transform: uppercase; margin-bottom: 30px;">Laboratorios Técnicos</h2>
         <div class="video-container">
             
-            <div class="video-card" onclick="toggleVideo(this)">
-                <video id="vid1" playsinline>
+            <div class="video-card">
+                <video controls playsinline>
                     <source src="Portafolio_2.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
                 </video>
             </div>
 
-            <div class="video-card" onclick="toggleVideo(this)">
-                <video id="vid2" playsinline>
+            <div class="video-card">
+                <video controls playsinline>
                     <source src="video3.mp4" type="video/mp4">
                 </video>
             </div>
@@ -110,40 +167,12 @@
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // LOGICA PARA AGRANDAR Y DAR PLAY
-        function toggleVideo(card) {
-            const video = card.querySelector('video');
-            const overlay = document.getElementById('videoOverlay');
-            
-            if (!card.classList.contains('active')) {
-                // AGRANDAR
-                card.classList.add('active');
-                overlay.classList.add('active');
-                video.muted = false; // Activa sonido
-                video.controls = true; // Muestra barra
-                video.play();
-            } else {
-                // ENCUIDAR
-                card.classList.remove('active');
-                overlay.classList.remove('active');
-                video.pause();
-                video.controls = false;
-                video.muted = true;
-            }
-        }
-
-        // CERRAR AL HACER CLIC FUERA
-        document.getElementById('videoOverlay').onclick = function() {
-            const activeCard = document.querySelector('.video-card.active');
-            if(activeCard) toggleVideo(activeCard);
-        };
-
-        // Animación línea (tu código original)
         const path = document.getElementById('masterPath');
         const dot = document.getElementById('movingDot');
         const pathLength = path.getTotalLength();
         path.style.strokeDasharray = pathLength;
         path.style.strokeDashoffset = pathLength;
+
         function animateLine() {
             let startTime = null;
             function step(timestamp) {
@@ -158,7 +187,20 @@
             requestAnimationFrame(step);
         }
         animateLine();
+
+        document.querySelectorAll('.counter').forEach(c => {
+            const target = +c.getAttribute('data-target');
+            let count = 0;
+            const update = () => {
+                const speed = target / 100;
+                if (count < target) {
+                    count += speed;
+                    c.innerText = Math.ceil(count);
+                    setTimeout(update, 25);
+                } else { c.innerText = target; }
+            };
+            update();
+        });
     </script>
 </body>
 </html>
-
